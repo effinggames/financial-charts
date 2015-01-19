@@ -1,0 +1,11 @@
+###OSX###
+
+.DS_Store
+.keys
+
+npm-debug.log
+
+/public
+/node_modules
+/app/lib
+/.idea
