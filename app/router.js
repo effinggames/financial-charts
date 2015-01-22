@@ -1,8 +1,8 @@
-var express = require('express'),
-    router = express.Router();
+var Router = require('named-router'),
+    router = new Router();
 
-router.get('/', function(req, res) {
-    res.render('home', {title: 'Funky Town'});
+router.get('/test', 'home', function(req, res) {
+    res.render('home', { title: 'Funky Town' });
 });
 
 module.exports = router;

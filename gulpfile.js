@@ -96,7 +96,7 @@ gulp.task('default', ['clean'], function() {
     return merge(copyStuff(), concatCSS(), webpackAppJS())
     .on('end', function() {
         syncMe();
-    });;
+    });
 });
 
 //production build task
