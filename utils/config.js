@@ -5,7 +5,7 @@ var hbs = require('hbs'),
     router = require('../app/router'),
     hbsHelpers = require('./hbsHelpers');
 
-hbsHelpers.init(router);
+hbsHelpers.init();
 
 var configApp = function(app) {
     app.use(compress());

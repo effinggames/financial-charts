@@ -1,13 +1,13 @@
-var hbs = require('hbs');
+var hbs = require('hbs'),
+    router = require('../app/router'),
+    hbsHelpers = {};
 
-var helpers = {
-    init: function(namedRouter) {
-        hbs.registerHelper('link_to', function(name, params) {
-            if (typeof params === 'string')
-                params = JSON.parse(params);
-            return namedRouter.build(name, params);
-        });
-    }
+hbsHelpers.init = function() {
+    hbs.registerHelper('link_to', function(name, params) {
+        if (typeof params === 'string')
+            params = JSON.parse(params);
+        return router.build(name, params);
+    });
 };
 
-module.exports = helpers;
+module.exports = hbsHelpers;
