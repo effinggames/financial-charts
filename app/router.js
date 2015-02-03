@@ -1,7 +1,6 @@
 var router = require('named-router')();
+var pages = require('./pages');
 
-router.get('/', 'home', function(req, res) {
-    res.render('home', { title: 'Funky Town' });
-});
+router.get('/', 'home', pages.home);
 
 module.exports = router;

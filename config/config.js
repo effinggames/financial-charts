@@ -1,5 +1,4 @@
 var hbs = require('hbs'),
-    path = require('path'),
     express = require('express'),
     compress = require('compression'),
     router = require('../app/router'),
@@ -7,7 +6,7 @@ var hbs = require('hbs'),
 
 hbsHelpers.init();
 
-var configApp = function(app) {
+var appConfig = function(app) {
     app.use(compress());
     app.use(router);
     app.use(express.static(__dirname + '/../public'));
@@ -16,10 +15,7 @@ var configApp = function(app) {
     app.set('views', __dirname + '/../app/views');
     app.set('port', process.env.PORT || 8000);
 
-    if (process.env.NODE_ENV === 'production') {
-        app.enable('view cache');
-    }
     return app;
 };
 
-module.exports = configApp;
+module.exports = appConfig;

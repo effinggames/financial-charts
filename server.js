@@ -20,7 +20,7 @@ if (cluster.isMaster) {
 
 } else {
     var express = require('express'),
-        config = require('./utils/config'),
+        config = require('./config/config'),
         app = config(express());
 
     console.log('Worker ' + cluster.worker.id + ' running!');
