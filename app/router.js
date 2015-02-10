@@ -1,5 +1,5 @@
-var router = require('named-router')();
-var pages = require('./pages');
+const router = require('named-router')(),
+    pages = require('./pages');
 
 router.get('/', 'home', pages.home);
 

@@ -1,4 +1,4 @@
-var hbs = require('hbs'),
+const hbs = require('hbs'),
     express = require('express'),
     compress = require('compression'),
     router = require('../app/router'),
@@ -6,7 +6,7 @@ var hbs = require('hbs'),
 
 hbsHelpers.init();
 
-var appConfig = function(app) {
+const setupApp = (app) => {
     app.use(compress());
     app.use(router);
     app.use(express.static(__dirname + '/../public'));
@@ -18,4 +18,4 @@ var appConfig = function(app) {
     return app;
 };
 
-module.exports = appConfig;
+module.exports = setupApp;

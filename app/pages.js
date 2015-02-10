@@ -1,6 +1,6 @@
-var pages = {};
+const pages = {};
 
-pages.home = function(req, res) {
+pages.home = (req, res) => {
     res.render('home', { title: 'Funky Town' });
 };
 

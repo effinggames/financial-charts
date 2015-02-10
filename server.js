@@ -1,7 +1,7 @@
-var cluster = require('cluster');
+const cluster = require('cluster');
 
 if (cluster.isMaster) {
-    var cpuCount = require('os').cpus().length;
+    let cpuCount = require('os').cpus().length;
 
     if (process.env.NODE_ENV === 'production')
         console.log('Running in production mode!');
@@ -10,22 +10,22 @@ if (cluster.isMaster) {
         cpuCount = 1;
     }
 
-    for (var i = 0; i < cpuCount; i++)
+    for (let i = 0; i < cpuCount; i++)
         cluster.fork();
 
-    cluster.on('exit', function(worker) {
+    cluster.on('exit', (worker) => {
         console.log('Worker ' + worker.id + ' died :(');
         cluster.fork();
     });
 
 } else {
-    var express = require('express'),
+    const express = require('express'),
         config = require('./config/config'),
         app = config(express());
 
     console.log('Worker ' + cluster.worker.id + ' running!');
 
-    app.listen(app.get('port'), function() {
+    app.listen(app.get('port'), () => {
         console.log('Express server listening on port ' + app.get('port'));
     });
 }

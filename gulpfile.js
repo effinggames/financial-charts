@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     gulpif = require('gulp-if'),
-    clean = require('gulp-rimraf'),
+    clean = require('gulp-clean'),
     browserSync = require('browser-sync'),
     reloadMe = require('browser-sync').reload,
     imageMin = require('gulp-imagemin'),
@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     nib = require('nib'),
     es = require('event-stream'),
     merge = require('event-stream').concat;
-    
+
 var publicDir = './public',
     publicImgDir = './public/img';
 
@@ -24,21 +24,17 @@ var webpackAppJS = function(minifyMe) {
         .pipe(gulp.dest(publicDir));
 };
 var concatCSS = function(minifyMe) {
-    return gulp.src([
-        './app/styles/**/*.styl',
-    ])
-    .pipe(stylus({use: [nib()]}))
-    .pipe(concat('app.css'))
-    .pipe(gulpif(minifyMe, cssMin()))
-    .pipe(gulp.dest(publicDir))
-    .pipe(reloadMe({stream:true}));
+    return gulp.src('./app/styles/**/*.styl')
+        .pipe(stylus({use: [nib()]}))
+        .pipe(concat('app.css'))
+        .pipe(gulpif(minifyMe, cssMin()))
+        .pipe(gulp.dest(publicDir))
+        .pipe(reloadMe({stream:true}));
 };
 var copyStuff = function() {
-    return gulp.src([
-        './app/img/**/*',
-    ], { base: './app' })
-    .pipe(filterEmptyDirs())
-    .pipe(gulp.dest(publicDir));
+    return gulp.src('./app/img/**/*', { base: './app' })
+        .pipe(filterEmptyDirs())
+        .pipe(gulp.dest(publicDir));
 };
 
 //removes empty dirs from stream
@@ -53,35 +49,32 @@ var filterEmptyDirs = function() {
 };
 
 var minifyImages = function() {
-    return gulp.src([
-        publicImgDir+'/**/*',
-    ])
-    .pipe(imageMin())
-    .pipe(gulp.dest(publicImgDir));
+    return gulp.src(publicImgDir+'/**/*')
+        .pipe(imageMin())
+        .pipe(gulp.dest(publicImgDir));
 };
 
 //opens up browserSync url
 var syncMe = function() {
     browserSync({
         proxy: 'localhost:8000',
-        open: false,
-        // notify: false
+        open: false
     });
 };
 
 //cleans build folder
 gulp.task('clean', function() {
-    return gulp.src(publicDir,{read: false})
-    .pipe(clean());
+    return gulp.src(publicDir, { read: false })
+        .pipe(clean());
 });
-    
+
 //build + watching, for development
 gulp.task('default', ['clean'], function() {
 
     gulp.watch(['./app/scripts/**/*.js'], function() {
         console.log('File change - webpackAppJS()');
         webpackAppJS()
-        .pipe(reloadMe({stream:true}));
+            .pipe(reloadMe({stream:true}));
     });
     gulp.watch('./app/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
@@ -90,19 +83,37 @@ gulp.task('default', ['clean'], function() {
     gulp.watch(['./app/img/**/*'], function() {
         console.log('File change - copyStuff()');
         copyStuff()
-        .pipe(reloadMe({stream:true}));
+            .pipe(reloadMe({stream:true}));
     });
 
     return merge(copyStuff(), concatCSS(), webpackAppJS())
-    .on('end', function() {
-        syncMe();
+        .on('end', function() {
+            syncMe();
+        });
+});
+
+gulp.task('watch', ['default'], function() {
+
+    gulp.watch(['./app/scripts/**/*.js'], function() {
+        console.log('File change - webpackAppJS()');
+        webpackAppJS()
+            .pipe(reloadMe({stream:true}));
+    });
+    gulp.watch('./app/styles/**/*.styl', function() {
+        console.log('File change - concatCSS()');
+        concatCSS();
+    });
+    gulp.watch(['./app/img/**/*'], function() {
+        console.log('File change - copyStuff()');
+        copyStuff()
+            .pipe(reloadMe({stream:true}));
     });
 });
 
 //production build task
 gulp.task('build', ['clean'], function() {
     return merge(copyStuff(), webpackAppJS(true), concatCSS(true))
-    .on('end', function() {
-        minifyImages();
-    });
+        .on('end', function() {
+            minifyImages();
+        });
 });

@@ -1,9 +1,9 @@
-var hbs = require('hbs'),
+const hbs = require('hbs'),
     router = require('../app/router'),
     hbsHelpers = {};
 
-hbsHelpers.init = function() {
-    hbs.registerHelper('link_to', function(name, params) {
+hbsHelpers.init = () => {
+    hbs.registerHelper('link_to', (name, params) => {
         if (typeof params === 'string')
             params = JSON.parse(params);
         
