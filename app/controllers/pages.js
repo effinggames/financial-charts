@@ -2,7 +2,7 @@
 const Pages = {};
 
 Pages.home = (req, res) => {
-    res.render('pages/home.html', {title: 'Home'});
+    res.render('pages/home', {title: 'Home'});
 };
 
 module.exports = Pages;

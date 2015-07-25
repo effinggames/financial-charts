@@ -1,5 +1,4 @@
 'use strict';
-const Swig = require('swig');
 const Express = require('express');
 const Compress = require('compression');
 const AppRouter = require('./app/router');
