@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --harmony server.js"
+    "start": "node --harmony --harmony_arrow_functions main.js"
   },
   "engines": {
-    "node": "0.12.x"
+    "iojs": "2.4.x"
   },
   "dependencies": {
     "browser-sync": "^1.9.1",

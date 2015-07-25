@@ -20,12 +20,11 @@ if (Cluster.isMaster) {
         Logger.info('Worker %d died :(', worker.id);
         Cluster.fork();
     });
-
 } else {
-    const App = require('./express');
+    const App = require('./App');
     const app = new App();
 
-    Logger.info('Worker '+Cluster.worker.id+' running!');
+    Logger.info('Worker %d running!', Cluster.worker.id);
 
     app.listen(app.get('port'), () => {
         Logger.info('Express server listening on port ' + app.get('port'));

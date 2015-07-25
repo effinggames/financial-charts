@@ -1,7 +1,7 @@
 Express-Template
 =================
 
-Template for a standard Express 4 application.
+Template for a standard Express 4 application, using io.js and ES6 features.
 
 ### Usage:
 
