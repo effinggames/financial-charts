@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <meta charSet="utf-8"/>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type='text/css' href="/app.css"/>
+        <script type="text/javascript" src="/app.js" defer></script>
+    </head>
+    <body>
+        <div id="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

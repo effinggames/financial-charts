@@ -1,6 +1,7 @@
-const router = require('named-router')(),
-    pages = require('./pages');
+'use strict';
+const Router = require('named-router')();
+const PageController = require('./controllers/pages');
 
-router.get('/', 'home', pages.home);
+Router.get('/', 'home', PageController.home);
 
-module.exports = router;
+module.exports = Router;

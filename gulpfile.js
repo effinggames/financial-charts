@@ -85,6 +85,10 @@ gulp.task('default', ['clean'], function() {
         copyStuff()
             .pipe(reloadMe({stream:true}));
     });
+    gulp.watch(['./app/templates/**/*'], function() {
+        console.log('File change - templates');
+        reloadMe();
+    });
 
     return merge(copyStuff(), concatCSS(), webpackAppJS())
         .on('end', function() {

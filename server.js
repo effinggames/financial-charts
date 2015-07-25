@@ -1,31 +1,33 @@
-const cluster = require('cluster');
+'use strict';
+const Cluster = require('cluster');
+const Logger = require('winston2');
 
-if (cluster.isMaster) {
+if (Cluster.isMaster) {
     let cpuCount = require('os').cpus().length;
 
-    if (process.env.NODE_ENV === 'production')
-        console.log('Running in production mode!');
-    else {
-        console.log('Running in development mode!');
+    if (process.env.NODE_ENV === 'production') {
+        Logger.info('Running in production mode!');
+    } else {
+        Logger.info('Running in development mode!');
         cpuCount = 1;
     }
 
-    for (let i = 0; i < cpuCount; i++)
-        cluster.fork();
+    for (let i = 0; i < cpuCount; i++) {
+        Cluster.fork();
+    }
 
-    cluster.on('exit', (worker) => {
-        console.log('Worker ' + worker.id + ' died :(');
-        cluster.fork();
+    Cluster.on('exit', worker => {
+        Logger.info('Worker %d died :(', worker.id);
+        Cluster.fork();
     });
 
 } else {
-    const express = require('express'),
-        config = require('./config/config'),
-        app = config(express());
+    const App = require('./express');
+    const app = new App();
 
-    console.log('Worker ' + cluster.worker.id + ' running!');
+    Logger.info('Worker '+Cluster.worker.id+' running!');
 
     app.listen(app.get('port'), () => {
-        console.log('Express server listening on port ' + app.get('port'));
+        Logger.info('Express server listening on port ' + app.get('port'));
     });
 }
