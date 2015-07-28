@@ -4,8 +4,8 @@ const Compress = require('compression');
 const AppRouter = require('./app/AppRouter');
 const NunjucksHelper = require('./util/NunjucksHelper');
 
-const templateDir =  `${__dirname}/app/templates`;
-const publicDir = `${__dirname}/public`;
+const templateDir = __dirname + '/app/templates';
+const publicDir = __dirname + '/public';
 
 /**
  * Main express app setup/configuration class
