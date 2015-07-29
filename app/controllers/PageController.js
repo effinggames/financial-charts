@@ -5,7 +5,7 @@
  */
 class PageController {
     home(req, res) {
-        res.render('pages/home', {title: 'Home'});
+        res.render('home', {title: 'Home'});
     };
 }
 

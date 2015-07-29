@@ -2,7 +2,7 @@
 const Express = require('express');
 const Compress = require('compression');
 const AppRouter = require('./app/AppRouter');
-const NunjucksHelper = require('./util/NunjucksHelper');
+const Nunjucks = require('nunjucks');
 
 const templateDir = __dirname + '/app/templates';
 const publicDir = __dirname + '/public';
@@ -21,7 +21,14 @@ class App extends Express {
         this.set('views', templateDir);
         this.set('port', process.env.PORT || 8000);
 
-        NunjucksHelper.init(this, AppRouter, templateDir);
+        Nunjucks.configure(templateDir, {
+            autoescape: true,
+            trimBlocks: true,
+            lstripBlocks: true,
+            express: this
+        }).addGlobal('linkTo', (name, params) =>
+            AppRouter.build(name, params)
+        );
     }
 }
 
