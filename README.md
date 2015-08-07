@@ -13,7 +13,7 @@ gulp build
 npm start
 ```
 
-Env variables:
+Env variables:  
 `NODE_ENV`: Set to 'production' for template caching  
 
 Gulp Tasks:  
