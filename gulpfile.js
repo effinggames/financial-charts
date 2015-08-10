@@ -4,7 +4,10 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     reloadMe = require('browser-sync').reload,
     imageMin = require('gulp-imagemin'),
-    webpack = require('gulp-webpack'),
+    sourcemaps = require('gulp-sourcemaps'),
+    streamqueue = require('streamqueue'),
+    ngAnnotate = require('gulp-ng-annotate'),
+    babel = require('gulp-babel'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     stylus = require('gulp-stylus'),
@@ -16,9 +19,19 @@ var gulp = require('gulp'),
 var publicDir = './public',
     publicImgDir = './public/img';
 
-var webpackAppJS = function(minifyMe) {
-    return gulp.src('./app/scripts/main.js')
-        .pipe(webpack({}))
+var concatAppJS = function(minifyMe) {
+    var appFileStream = gulp.src('./app/scripts/**/*.js')
+        .pipe(gulpif(minifyMe, ngAnnotate()))
+        .pipe(sourcemaps.init())
+        .pipe(babel());
+
+    var vendorFileStream = gulp.src([
+        './bower_components/jquery/dist/jquery.js',
+        './bower_components/highcharts-release/highcharts.js',
+        './bower_components/angular/angular.js'
+    ]);
+
+    return streamqueue({ objectMode: true }, vendorFileStream, appFileStream)
         .pipe(concat('app.js'))
         .pipe(gulpif(minifyMe, uglify()))
         .pipe(gulp.dest(publicDir));
@@ -72,8 +85,8 @@ gulp.task('clean', function() {
 gulp.task('default', ['clean'], function() {
 
     gulp.watch(['./app/scripts/**/*.js'], function() {
-        console.log('File change - webpackAppJS()');
-        webpackAppJS()
+        console.log('File change - concatAppJS()');
+        concatAppJS()
             .pipe(reloadMe({stream:true}));
     });
     gulp.watch('./app/styles/**/*.styl', function() {
@@ -90,7 +103,7 @@ gulp.task('default', ['clean'], function() {
         reloadMe();
     });
 
-    return merge(copyStuff(), concatCSS(), webpackAppJS())
+    return merge(copyStuff(), concatCSS(), concatAppJS())
         .on('end', function() {
             syncMe();
         });
@@ -99,8 +112,8 @@ gulp.task('default', ['clean'], function() {
 gulp.task('watch', ['default'], function() {
 
     gulp.watch(['./app/scripts/**/*.js'], function() {
-        console.log('File change - webpackAppJS()');
-        webpackAppJS()
+        console.log('File change - concatAppJS()');
+        concatAppJS()
             .pipe(reloadMe({stream:true}));
     });
     gulp.watch('./app/styles/**/*.styl', function() {
@@ -116,7 +129,7 @@ gulp.task('watch', ['default'], function() {
 
 //production build task
 gulp.task('build', ['clean'], function() {
-    return merge(copyStuff(), webpackAppJS(true), concatCSS(true))
+    return merge(copyStuff(), concatCSS(true), concatAppJS(true))
         .on('end', function() {
             minifyImages();
         });

@@ -1,6 +1,5 @@
 'use strict';
 const NamedRouter = require('named-router');
-const PageController = require('./controllers/PageController');
 
 /**
  * Singleton router for all the frontend routes
@@ -8,7 +7,7 @@ const PageController = require('./controllers/PageController');
 class AppRouter extends NamedRouter {
     constructor() {
         super();
-        this.get('/', 'home', PageController.home);
+        this.get('/', 'index', (req, res) => res.render('index'));
     }
 }
 

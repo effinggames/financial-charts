@@ -4,7 +4,7 @@ const Compress = require('compression');
 const AppRouter = require('./app/AppRouter');
 const Nunjucks = require('nunjucks');
 
-const templateDir = __dirname + '/app/templates';
+const viewDir = __dirname + '/app/views';
 const publicDir = __dirname + '/public';
 
 /**
@@ -18,14 +18,18 @@ class App extends Express {
         this.use(Express.static(publicDir));
 
         this.set('view engine', 'html');
-        this.set('views', templateDir);
+        this.set('views', viewDir);
         this.set('port', process.env.PORT || 8000);
 
-        Nunjucks.configure(templateDir, {
+        Nunjucks.configure(viewDir, {
             autoescape: true,
             trimBlocks: true,
             lstripBlocks: true,
-            express: this
+            express: this,
+            tags: {
+                variableStart: '[[',
+                variableEnd: ']]'
+            }
         }).addGlobal('linkTo', (name, params) =>
             AppRouter.build(name, params)
         );

@@ -5,9 +5,9 @@
         <link rel="stylesheet" type='text/css' href="/app.css"/>
         <script type="text/javascript" src="/app.js" defer></script>
     </head>
-    <body>
-        <div id="container">
-            {% block content %}{% endblock %}
+    <body ng-app="app">
+        <div id="wrapper">
+            {% block body %}{% endblock %}
         </div>
     </body>
 </html>
