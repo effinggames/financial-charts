@@ -6,7 +6,10 @@
 
 {% block body %}
     <h1>Stock Asset Allocation vs Annualized 10-year SPX Return</h1>
-    <div class="graphContainer">
-        <div allocation-graph></div>
+    <div class="graphContainer" allocation-chart chart-data="$window.data.chartData"></div>
+    <div>
+        <span class="correlationText">
+            R<sup>2</sup>: [[ data.correlation | round(7) | abs ]]
+        </span>
     </div>
 {% endblock %}

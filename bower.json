@@ -1,0 +1,21 @@
+{
+  "name": "financial-chart",
+  "version": "1.0.0",
+  "homepage": "https://github.com/robgraeber/financial-chart",
+  "authors": [
+    "Rob Graeber <bgraeber@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "highcharts-release": "~4.1.7",
+    "jquery": "~2.1.4",
+    "angular": "1.2.28"
+  }
+}

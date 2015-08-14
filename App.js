@@ -21,7 +21,7 @@ class App extends Express {
         this.set('views', viewDir);
         this.set('port', process.env.PORT || 8000);
 
-        Nunjucks.configure(viewDir, {
+        var env = Nunjucks.configure(viewDir, {
             autoescape: true,
             trimBlocks: true,
             lstripBlocks: true,
@@ -30,8 +30,13 @@ class App extends Express {
                 variableStart: '[[',
                 variableEnd: ']]'
             }
-        }).addGlobal('linkTo', (name, params) =>
+        });
+
+        env.addGlobal('linkTo', (name, params) =>
             AppRouter.build(name, params)
+        );
+        env.addFilter('stringify', (value) =>
+            JSON.stringify(value)
         );
     }
 }

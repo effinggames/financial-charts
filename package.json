@@ -3,19 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --harmony --harmony_arrow_functions main.js"
+    "start": "node --harmony --harmony_arrow_functions Main.js",
+    "nodemon": "nodemon --ignore app/ --ignore public/ --ignore bower_components --ignore node_modules --harmony --harmony_arrow_functions Main.js"
   },
   "engines": {
     "iojs": "2.4.x"
   },
   "dependencies": {
+    "bluebird": "^2.9.34",
     "browser-sync": "^1.9.1",
     "compression": "^1.1.0",
-    "ejs": "^2.3.3",
     "event-stream": "^3.2.2",
     "express": "^4.9.0",
     "gulp": "^3.8.11",
-    "gulp-add-src": "^0.2.0",
     "gulp-babel": "^5.2.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.4.3",
@@ -27,11 +27,12 @@
     "gulp-stylus": "^1.3.7",
     "gulp-uglify": "^1.1.0",
     "gulp-webpack": "^0.3.0",
+    "knex": "^0.8.6",
     "named-router": "^1.0.3",
     "nib": "^1.1.0",
     "nunjucks": "^1.3.4",
+    "pg": "^4.4.1",
     "request": "^2.51.0",
-    "streamqueue": "^1.1.0",
     "winston2": "^1.0.3"
   }
 }

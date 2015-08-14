@@ -6,6 +6,5 @@
 npm-debug.log
 
 /public
-/node_modules
 /.idea
 /app/.idea

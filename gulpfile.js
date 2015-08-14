@@ -5,7 +5,6 @@ var gulp = require('gulp'),
     reloadMe = require('browser-sync').reload,
     imageMin = require('gulp-imagemin'),
     sourcemaps = require('gulp-sourcemaps'),
-    streamqueue = require('streamqueue'),
     ngAnnotate = require('gulp-ng-annotate'),
     babel = require('gulp-babel'),
     concat = require('gulp-concat'),
@@ -20,19 +19,30 @@ var publicDir = './public',
     publicImgDir = './public/img';
 
 var concatAppJS = function(minifyMe) {
-    var appFileStream = gulp.src('./app/scripts/**/*.js')
+    var stream = gulp.src([
+        './app/scripts/App.js',
+        './app/scripts/**/*.js'
+    ])
         .pipe(gulpif(minifyMe, ngAnnotate()))
         .pipe(sourcemaps.init())
         .pipe(babel());
 
-    var vendorFileStream = gulp.src([
+    stream.on('error', function() {
+        console.log('Error parsing JS!');
+    });
+
+    return stream
+        .pipe(concat('app.js'))
+        .pipe(gulpif(minifyMe, uglify()))
+        .pipe(gulp.dest(publicDir));
+};
+var concatVendorJS = function(minifyMe) {
+    return gulp.src([
         './bower_components/jquery/dist/jquery.js',
         './bower_components/highcharts-release/highcharts.js',
         './bower_components/angular/angular.js'
-    ]);
-
-    return streamqueue({ objectMode: true }, vendorFileStream, appFileStream)
-        .pipe(concat('app.js'))
+    ])
+        .pipe(concat('vendor.js'))
         .pipe(gulpif(minifyMe, uglify()))
         .pipe(gulp.dest(publicDir));
 };
@@ -98,12 +108,12 @@ gulp.task('default', ['clean'], function() {
         copyStuff()
             .pipe(reloadMe({stream:true}));
     });
-    gulp.watch(['./app/templates/**/*'], function() {
+    gulp.watch(['./app/views/**/*'], function() {
         console.log('File change - templates');
         reloadMe();
     });
 
-    return merge(copyStuff(), concatCSS(), concatAppJS())
+    return merge(copyStuff(), concatCSS(), concatAppJS(), concatVendorJS())
         .on('end', function() {
             syncMe();
         });
@@ -129,7 +139,7 @@ gulp.task('watch', ['default'], function() {
 
 //production build task
 gulp.task('build', ['clean'], function() {
-    return merge(copyStuff(), concatCSS(true), concatAppJS(true))
+    return merge(copyStuff(), concatCSS(true), concatAppJS(true), concatVendorJS(true))
         .on('end', function() {
             minifyImages();
         });
