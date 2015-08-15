@@ -13,16 +13,20 @@ var gulp = require('gulp'),
     cssMin = require('gulp-minify-css'),
     nib = require('nib'),
     es = require('event-stream'),
+    streamqueue  = require('streamqueue'),
     merge = require('event-stream').concat;
 
 var publicDir = './public',
     publicImgDir = './public/img';
 
 var concatAppJS = function(minifyMe) {
-    var stream = gulp.src([
-        './app/scripts/App.js',
-        './app/scripts/**/*.js'
-    ])
+    var stream = streamqueue({ objectMode: true },
+        gulp.src('./app/scripts/App.js'),
+        gulp.src([
+            './app/scripts/**/*.js',
+            '!app/scripts/App.js'
+        ])
+    )
         .pipe(gulpif(minifyMe, ngAnnotate()))
         .pipe(sourcemaps.init())
         .pipe(babel());
