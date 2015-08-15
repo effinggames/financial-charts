@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node --harmony --harmony_arrow_functions Main.js",
-    "nodemon": "nodemon --ignore app/ --ignore public/ --ignore bower_components --ignore node_modules --harmony --harmony_arrow_functions Main.js"
+    "nodemon": "nodemon --ignore app/scripts/ --ignore public/ --ignore bower_components --ignore node_modules --harmony --harmony_arrow_functions Main.js"
   },
   "engines": {
     "iojs": "2.4.x"
@@ -32,6 +32,7 @@
     "nib": "^1.1.0",
     "nunjucks": "^1.3.4",
     "pg": "^4.4.1",
+    "regression": "^1.2.1",
     "request": "^2.51.0",
     "winston2": "^1.0.3"
   }

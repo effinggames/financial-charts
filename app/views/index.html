@@ -8,8 +8,11 @@
     <h1>Stock Asset Allocation vs Annualized 10-year SPX Return</h1>
     <div class="graphContainer" allocation-chart chart-data="$window.data.chartData"></div>
     <div>
-        <span class="correlationText">
-            R<sup>2</sup>: [[ data.correlation | round(7) | abs ]]
+        <span class="infoText correlation">
+            R<sup>2</sup>: [[ data.correlationSquared | round(7) | abs ]]
+        </span>
+        <span class="infoText">
+            Expected 10-Year SPX Returns: [[ data.expectedReturns | round(4) * 100 ]]%
         </span>
     </div>
 {% endblock %}

@@ -13,7 +13,7 @@
                 link: function ($scope, $elem, $attrs) {
                     const returnsData = $scope.chartData().filter(i => i.return_10).map(i => [new Date(i.date).getTime(), parseFloat((i.return_10 * 100).toFixed(2))]);
                     const allocationData = $scope.chartData().map(i => [new Date(i.date).getTime(), parseFloat((i.allocation * 100).toFixed(2))]);
-                    console.log('$scope:', $scope.chartData());
+
                     $elem.highcharts({
                         chart: {
                             alignTicks: false,
@@ -25,7 +25,9 @@
                         subtitle: {
                             useHTML: true,
                             text: `
-                            <a class="chartSubtitle" href="https://philosophicaleconomics.wordpress.com/2013/12/20/the-single-greatest-predictor-of-future-stock-market-returns/">
+                            <a class="chartSubtitle"
+                               href="https://philosophicaleconomics.wordpress.com/2013/12/20/the-single-greatest-predictor-of-future-stock-market-returns/"
+                               target="_blank">
                                 Source: Philosophical Economics
                             </a>
                             `

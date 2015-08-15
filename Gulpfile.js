@@ -145,8 +145,3 @@ gulp.task('build', ['clean'], function() {
             minifyImages();
         });
 });
-
-//un-minified build task
-gulp.task('dev', ['clean'], function() {
-    return merge(copyStuff(), concatCSS(), concatAppJS(), concatVendorJS());
-});
