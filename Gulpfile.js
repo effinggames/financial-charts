@@ -11,30 +11,18 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     stylus = require('gulp-stylus'),
     cssMin = require('gulp-minify-css'),
-    sort = require('gulp-sort'),
     nib = require('nib'),
     es = require('event-stream'),
     merge = require('event-stream').concat;
 
-var publicDir = './public',
-    publicImgDir = './public/img';
+var publicDir = __dirname + '/public',
+    publicImgDir = __dirname + '/public/img';
 
 var concatAppJS = function(minifyMe) {
-    var stream = 
-        gulp.src([
+    var stream = gulp.src([
+            './app/scripts/App.js',
             './app/scripts/**/*.js'
         ])
-        .pipe(sort({
-            comparator: function(file1, file2) {
-                if (file1.path.indexOf('/app/scripts/App.js') !== -1) {
-                    return -1;
-                }
-                if (file2.path.indexOf('/app/scripts/App.js') !== -1) {
-                    return 1;
-                }
-                return 0;
-            }
-        }))
         .pipe(gulpif(minifyMe, ngAnnotate()))
         .pipe(sourcemaps.init())
         .pipe(babel());
@@ -99,6 +87,7 @@ var syncMe = function() {
 
 //cleans build folder
 gulp.task('clean', function() {
+    console.log('Cleaning:', publicDir);
     return gulp.src(publicDir, { read: false })
         .pipe(clean());
 });
