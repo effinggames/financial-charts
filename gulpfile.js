@@ -11,22 +11,30 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     stylus = require('gulp-stylus'),
     cssMin = require('gulp-minify-css'),
+    sort = require('gulp-sort'),
     nib = require('nib'),
     es = require('event-stream'),
-    streamqueue  = require('streamqueue'),
     merge = require('event-stream').concat;
 
 var publicDir = './public',
     publicImgDir = './public/img';
 
 var concatAppJS = function(minifyMe) {
-    var stream = streamqueue({ objectMode: true },
-        gulp.src('./app/scripts/App.js'),
+    var stream = 
         gulp.src([
-            './app/scripts/**/*.js',
-            '!app/scripts/App.js'
+            './app/scripts/**/*.js'
         ])
-    )
+        .pipe(sort({
+            comparator: function(file1, file2) {
+                if (file1.path.indexOf('/app/scripts/App.js') !== -1) {
+                    return -1;
+                }
+                if (file2.path.indexOf('/app/scripts/App.js') !== -1) {
+                    return 1;
+                }
+                return 0;
+            }
+        }))
         .pipe(gulpif(minifyMe, ngAnnotate()))
         .pipe(sourcemaps.init())
         .pipe(babel());
@@ -147,4 +155,9 @@ gulp.task('build', ['clean'], function() {
         .on('end', function() {
             minifyImages();
         });
+});
+
+//un-minified build task
+gulp.task('dev', ['clean'], function() {
+    return merge(copyStuff(), concatCSS(), concatAppJS(), concatVendorJS());
 });
