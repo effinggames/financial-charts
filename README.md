@@ -25,4 +25,4 @@ Gulp Tasks:
 `gulp clean`: Cleans the /public folder and all compiled assets  
 `gulp default`: Compiles the assets without minifying / compressing  
 `gulp watch`: Watches the js, css, and image files for changes to recompile  
-`gulp build`: Compiles, minifies, and compresses the assets for production  
+`gulp build`: Compiles, minifies, and compresses the assets (for production)  
