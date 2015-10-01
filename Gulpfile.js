@@ -94,7 +94,6 @@ gulp.task('clean', function() {
 
 //build + watching, for development
 gulp.task('default', ['clean'], function() {
-
     gulp.watch(['./app/scripts/**/*.js'], function() {
         console.log('File change - concatAppJS()');
         concatAppJS()
@@ -121,7 +120,6 @@ gulp.task('default', ['clean'], function() {
 });
 
 gulp.task('watch', ['default'], function() {
-
     gulp.watch(['./app/scripts/**/*.js'], function() {
         console.log('File change - concatAppJS()');
         concatAppJS()
