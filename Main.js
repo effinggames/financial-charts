@@ -21,7 +21,7 @@ if (Cluster.isMaster) {
         Cluster.fork();
     });
 } else {
-    const App = require('./App');
+    const App = require('./app/App');
     const app = new App();
 
     Logger.info('Worker %d running!', Cluster.worker.id);

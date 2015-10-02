@@ -1,11 +1,11 @@
 'use strict';
 const Express = require('express');
 const Compress = require('compression');
-const AppRouter = require('./app/AppRouter');
+const AppRouter = require('./AppRouter');
 const Nunjucks = require('nunjucks');
 
-const viewDir = __dirname + '/app/views';
-const publicDir = __dirname + '/public';
+const viewDir = __dirname + '/views';
+const publicDir = __dirname + '/../public';
 
 /**
  * Main express app setup/configuration class
