@@ -9,3 +9,4 @@ npm-debug.log
 /.idea
 /app/.idea
 /node_modules
+/bower_components
