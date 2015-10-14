@@ -8,3 +8,4 @@ npm-debug.log
 /public
 /.idea
 /app/.idea
+/node_modules
