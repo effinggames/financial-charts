@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --harmony --harmony_arrow_functions Main.js",
-    "nodemon": "nodemon --ignore app/scripts/ --ignore public/ --ignore bower_components --ignore node_modules --harmony --harmony_arrow_functions Main.js"
+    "start": "node Main.js",
+    "test": "echo \"NPM Test: no tests specified\"",
+    "nodemon": "nodemon --ignore app/scripts/ --ignore public/ --ignore bower_components --ignore node_modules Main.js"
   },
   "engines": {
-    "iojs": "2.4.x"
+    "node": "4.2.x"
   },
   "dependencies": {
     "bluebird": "^2.9.34",
