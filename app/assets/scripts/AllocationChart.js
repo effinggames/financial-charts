@@ -50,8 +50,8 @@
                             startOnTick: false,
                             maxPadding: 0,
                             minPadding: 0,
-                            max: 55,
-                            min: 15,
+                            max: 57.5,
+                            min: 17.5
                         }, { // Secondary yAxis
                             title: {
                                 text: 'SPX 10-Year Returns',
@@ -73,8 +73,8 @@
                             startOnTick: false,
                             maxPadding: 0,
                             minPadding: 0,
-                            max: 27,
-                            min: -4.5,
+                            max: 24,
+                            min: -7.5
                         }],
                         xAxis: {
                             type: 'datetime',
