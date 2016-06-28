@@ -31,7 +31,7 @@
                             useHTML: true,
                             text: `
                             <a class="chartSubtitle"
-                               href="https://philosophicaleconomics.wordpress.com/2013/12/20/the-single-greatest-predictor-of-future-stock-market-returns/"
+                               href="http://www.philosophicaleconomics.com/2013/12/the-single-greatest-predictor-of-future-stock-market-returns/"
                                target="_blank">
                                 Source: Philosophical Economics
                             </a>
@@ -131,6 +131,11 @@
                                     valueSuffix: '%'
                                 },
                                 lineWidth: 2.5,
+                            },
+                            spline: {
+                                marker: {
+                                    enabled: false
+                                }
                             }
                         },
                         series: [
