@@ -2,7 +2,15 @@
 
 {% block body %}
     <h1>Stock Asset Allocation vs Annualized 10-year SPX Return</h1>
-    <div class="graphContainer" allocation-chart chart-data="$window.data.chartData"></div>
+    <div class="graphContainer"
+         allocation-chart
+         chart-data="$window.data.chartData"
+         chart-title="Stock Asset Allocation vs Annualized 10-Year SPX Return"
+         returns-axis-title="SPX 10-Year Returns"
+         allocation-axis-title="Stock Allocation (US Investors)"
+         allocation-percentage-min="17.5"
+         allocation-percentage-max="57.5">
+    </div>
     <div>
         <span class="infoText correlation">
             R<sup>2</sup>: [[ correlationSquared | round(7) | abs ]]

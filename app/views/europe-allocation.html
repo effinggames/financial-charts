@@ -1,0 +1,22 @@
+{% extends 'main-layout.html' %}
+
+{% block body %}
+    <h1>Stock Asset Allocation vs Annualized 10-year EAFE Return</h1>
+    <div class="graphContainer"
+         allocation-chart
+         chart-data="$window.data.chartData"
+         chart-title="Stock Asset Allocation vs Annualized 10-Year EAFE Return"
+         returns-axis-title="EAFE 10-Year Returns"
+         allocation-axis-title="Stock Allocation (EU Investors)"
+         allocation-percentage-min="-4"
+         allocation-percentage-max="22">
+    </div>
+    <div>
+        <span class="infoText correlation">
+            R<sup>2</sup>: [[ correlationSquared | round(7) | abs ]]
+        </span>
+        <span class="infoText">
+            Expected 10-Year EAFE Returns: [[ expectedReturns | round(4) * 100 ]]%
+        </span>
+    </div>
+{% endblock %}

@@ -8,11 +8,16 @@
             return {
                 restrict: 'A',
                 scope: {
-                    chartData: '&'
+                    chartData: '&',
+                    chartTitle: '@',
+                    returnsAxisTitle: '@',
+                    allocationAxisTitle: '@',
+                    allocationPercentageMin: '&',
+                    allocationPercentageMax: '&'
                 },
                 link: function ($scope, $elem, $attrs) {
                     const returnsData = $scope.chartData().filter(i => i.return_10).map(i => [new Date(i.date).getTime(), parseFloat((i.return_10 * 100).toFixed(2))]);
-                    const allocationData = $scope.chartData().map(i => [new Date(i.date).getTime(), parseFloat((i.allocation * 100).toFixed(2))]);
+                    const allocationData = $scope.chartData().map(i => [new Date(i.date).getTime(), parseFloat((i.percentage * 100).toFixed(2))]);
 
                     $elem.highcharts({
                         chart: {
@@ -20,7 +25,7 @@
                             type: 'spline'
                         },
                         title: {
-                            text: 'Stock Asset Allocation vs Annualized 10-Year SPX Return'
+                            text: $scope.chartTitle
                         },
                         subtitle: {
                             useHTML: true,
@@ -40,7 +45,7 @@
                                 }
                             },
                             title: {
-                                text: 'Stock Asset Allocation',
+                                text: $scope.allocationAxisTitle,
                                 style: {
                                     color: '#000'
                                 }
@@ -50,11 +55,11 @@
                             startOnTick: false,
                             maxPadding: 0,
                             minPadding: 0,
-                            max: 57.5,
-                            min: 17.5
+                            max: $scope.allocationPercentageMax(),
+                            min: $scope.allocationPercentageMin()
                         }, { // Secondary yAxis
                             title: {
-                                text: 'SPX 10-Year Returns',
+                                text: $scope.returnsAxisTitle,
                                 style: {
                                     color: '#000'
                                 }
@@ -130,16 +135,16 @@
                         },
                         series: [
                         {
-                            name: 'SPX 10-Year Returns',
+                            name: $scope.returnsAxisTitle,
                             yAxis: 1,
                             data: returnsData,
                             tooltip: {
                                 valueSuffix: ' %'
                             },
                             color: 'rgb(0, 3, 109)',
-                            zIndex: 10,
+                            zIndex: 10
                         }, {
-                            name: 'Stock Asset Allocation',
+                            name: $scope.allocationAxisTitle,
                             data: allocationData,
                             color: 'rgb(182, 0, 0)'
                         }]

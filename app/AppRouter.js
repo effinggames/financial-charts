@@ -11,6 +11,7 @@ class AppRouter extends NamedRouter {
     constructor() {
         super();
         this.get('/', 'index', MainController.getHomePage);
+        this.get('/europe', 'eafeChart', MainController.getEuropeAllocationChart);
     }
 }
 
