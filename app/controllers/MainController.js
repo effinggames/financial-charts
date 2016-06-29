@@ -28,17 +28,37 @@ class MainController {
             const regressionResults = Regression('linear', regressionData);
             const latestAllocation = rows1[rows1.length - 1].percentage;
             const expectedReturns = regressionResults.equation[0] * latestAllocation + regressionResults.equation[1];
-
             const lastUpdatedDate = Moment(new Date(rows1[rows1.length - 1].date)).tz('GMT').format('M/D/YYYY');
 
-            res.render('usa-allocation', {
-                title: 'Stock Asset Allocation vs SPX 10-Year Return',
-                correlationSquared: Math.pow(rows2[0].return_10, 2),
-                expectedReturns,
-                lastUpdatedDate,
-                data: {
-                    chartData: rows1
-                }
+            //gets the latest EAFE value
+            const latestEAFEQuery = Knex('usa.sp_500_daily')
+                .orderBy('date', 'desc')
+                .limit(1);
+
+            //gets the EAFE value for last allocation update
+            const latestAllocationEAFEQuery = Knex('usa.sp_500_daily')
+                .orderBy('date', 'desc')
+                .whereRaw(`date <= '${Moment(new Date(rows1[rows1.length - 1].date)).tz('GMT').format('YYYY-MM-DD')}'`)
+                .limit(1);
+
+            Promise.all([latestEAFEQuery, latestAllocationEAFEQuery]).spread((latestSP500Rows, latestAllocationSP500Rows) => {
+                const latestSP500Value = parseFloat(latestSP500Rows[0].value);
+                const latestAllocationSP500Value = parseFloat(latestAllocationSP500Rows[0].value);
+                const additionalReturns = Math.pow(latestAllocationSP500Value / latestSP500Value, 0.1) - 1;
+                const extrapolatedReturns = expectedReturns + additionalReturns;
+                const lastExtrapolatedDate = Moment(new Date(latestSP500Rows[0].date)).tz('GMT').format('M/D/YYYY');
+
+                res.render('usa-allocation', {
+                    title: 'Stock Asset Allocation vs SPX 10-Year Return',
+                    correlationSquared: Math.pow(rows2[0].return_10, 2),
+                    expectedReturns,
+                    extrapolatedReturns,
+                    lastUpdatedDate,
+                    lastExtrapolatedDate,
+                    data: {
+                        chartData: rows1
+                    }
+                });
             });
         });
     }
