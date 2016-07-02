@@ -20,8 +20,8 @@ var publicDir = __dirname + '/public',
 
 var concatAppJS = function(minifyMe) {
     var stream = gulp.src([
-            './app/assets/scripts/App.js',
-            './app/assets/scripts/**/*.js'
+            './assets/scripts/App.js',
+            './assets/scripts/**/*.js'
         ])
         .pipe(gulpif(minifyMe, ngAnnotate()))
         .pipe(sourcemaps.init())
@@ -47,7 +47,10 @@ var concatVendorJS = function(minifyMe) {
         .pipe(gulp.dest(publicDir));
 };
 var concatCSS = function(minifyMe) {
-    return gulp.src('./app/assets/styles/**/*.styl')
+    return gulp.src([
+        './app/styles/reset.styl',
+        './app/styles/main.styl'
+    ])
         .pipe(stylus({use: [nib()]}))
         .pipe(concat('app.css'))
         .pipe(gulpif(minifyMe, cssMin()))
@@ -55,7 +58,7 @@ var concatCSS = function(minifyMe) {
         .pipe(reloadMe({stream:true}));
 };
 var copyStuff = function() {
-    return gulp.src('./app/assets/img/**/*', { base: './app' })
+    return gulp.src('./assets/img/**/*', { base: './app' })
         .pipe(filterEmptyDirs())
         .pipe(gulp.dest(publicDir));
 };
@@ -94,21 +97,21 @@ gulp.task('clean', function() {
 
 //build + watching, for development
 gulp.task('default', ['clean'], function() {
-    gulp.watch(['./app/assets/scripts/**/*.js'], function() {
+    gulp.watch(['./assets/scripts/**/*.js'], function() {
         console.log('File change - concatAppJS()');
         concatAppJS()
             .pipe(reloadMe({stream:true}));
     });
-    gulp.watch('./app/assets/styles/**/*.styl', function() {
+    gulp.watch('./app/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
         concatCSS();
     });
-    gulp.watch(['./app/assets/img/**/*'], function() {
+    gulp.watch(['./assets/img/**/*'], function() {
         console.log('File change - copyStuff()');
         copyStuff()
             .pipe(reloadMe({stream:true}));
     });
-    gulp.watch(['./app/assets/views/**/*'], function() {
+    gulp.watch(['./app/views/**/*'], function() {
         console.log('File change - templates');
         reloadMe();
     });
@@ -120,16 +123,16 @@ gulp.task('default', ['clean'], function() {
 });
 
 gulp.task('watch', ['default'], function() {
-    gulp.watch(['./app/assets/scripts/**/*.js'], function() {
+    gulp.watch(['./assets/scripts/**/*.js'], function() {
         console.log('File change - concatAppJS()');
         concatAppJS()
             .pipe(reloadMe({stream:true}));
     });
-    gulp.watch('./app/assets/styles/**/*.styl', function() {
+    gulp.watch('./app/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
         concatCSS();
     });
-    gulp.watch(['./app/assets/img/**/*'], function() {
+    gulp.watch(['./assets/img/**/*'], function() {
         console.log('File change - copyStuff()');
         copyStuff()
             .pipe(reloadMe({stream:true}));

@@ -1,0 +1,20 @@
+{% extends 'main-layout.html' %}
+
+{% block body %}
+    <h1>U.S. Unemployment Rate vs 12 Month Moving Average</h1>
+    <div class="graphContainer"
+         unemployment-chart
+         unemployment-data="$window.data.unemploymentChartData"
+         recession-data="$window.data.recessionChartData"
+         chart-title="U.S. Unemployment Rate vs 12 Month Moving Average">
+    </div>
+    <div class="infoTextContainer">
+        <span class="infoText" ng-cloak>
+            Recession Alert Active: {{ isRecessionAlert ? 'True' : 'False' }}
+        </span>
+        <span class="infoText" ng-cloak>
+            Last Recession Alert: {{ recessionAlertDate ? (recessionAlertDate | date:'M/d/yyyy') : 'N/A' }}
+        </span>
+    </div>
+    <div class="disclaimer">* Indicator is designed to minimize chance of false negatives, but may have false positives.</div>
+{% endblock %}

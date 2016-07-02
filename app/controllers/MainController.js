@@ -120,6 +120,30 @@ class MainController {
             });
         });
     }
+    getUnemploymentChart(req, res) {
+        //monthly unemployment rate query
+        const query1 = Knex('usa.unemployment_rate');
+        //recession dates query
+        const query2 = Knex('usa.recessions');
+
+        //fetch queries
+        Promise.all([query1, query2]).spread((rows1, rows2) => {
+            //format dates
+            rows1.forEach(i => i.date = i.date.toISOString().slice(0, 10));
+            rows2.forEach(i => {
+                i.start_date = i.start_date.toISOString().slice(0, 10);
+                i.end_date = i.end_date.toISOString().slice(0, 10);
+            });
+
+            res.render('usa-unemployment', {
+                title: 'U.S. Unemployment Rate vs 12 Month Moving Average',
+                data: {
+                    unemploymentChartData: rows1,
+                    recessionChartData: rows2
+                }
+            });
+        });
+    }
 }
 
 module.exports = new MainController();
