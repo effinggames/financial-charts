@@ -134,9 +134,11 @@ class MainController {
                 i.start_date = i.start_date.toISOString().slice(0, 10);
                 i.end_date = i.end_date.toISOString().slice(0, 10);
             });
+            const lastUpdatedDate = Moment(new Date(rows1[rows1.length - 1].date)).tz('GMT').format('M/D/YYYY');
 
             res.render('usa-unemployment', {
                 title: 'U.S. Unemployment Rate vs 12 Month Moving Average',
+                lastUpdatedDate,
                 data: {
                     unemploymentChartData: rows1,
                     recessionChartData: rows2

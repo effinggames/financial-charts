@@ -11,7 +11,7 @@ Displays data generated from here: https://github.com/robgraeber/financial-scrap
 
 ```
 git clone https://github.com/robgraeber/financial-chart.git && cd financial-chart
-npm install && bower install && gulp build
+npm install
 (setup env variables)
 npm start
 ```

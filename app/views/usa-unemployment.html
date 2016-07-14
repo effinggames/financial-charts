@@ -15,6 +15,9 @@
         <span class="infoText" ng-cloak>
             Last Recession Alert: {{ recessionAlertDate ? (recessionAlertDate | date:'M/d/yyyy') : 'N/A' }}
         </span>
+        <span class="infoText" ng-cloak>
+            Last Updated: [[ lastUpdatedDate ]]
+        </span>
     </div>
     <div class="disclaimer">* Indicator is designed to minimize chance of false negatives, but may have false positives.</div>
 {% endblock %}

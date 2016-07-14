@@ -38,6 +38,9 @@ class App extends Express {
         env.addFilter('stringify', (value) =>
             JSON.stringify(value)
         );
+        env.addFilter('toFixed', (value, num) =>
+            value.toFixed(num)
+        );
     }
 }
 
