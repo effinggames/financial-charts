@@ -6,12 +6,14 @@
     </head>
     <body ng-app="app" ng-controller="MainCtrl">
         <div id="wrapper">
+            <h1>[[ title ]]</h1>
             {% block body %}
             {% endblock %}
             <div class="links">
                 <a href="[[ linkTo('index') ]]">SP500 Returns</a>
                 <a href="[[ linkTo('eafeChart') ]]">EAFE Returns</a>
                 <a href="[[ linkTo('usaUnemployment') ]]">UN Rate</a>
+                <a href="[[ linkTo('yieldCurve') ]]">Yield Curve</a>
             </div>
         </div>
         <!--[if lt IE 9]>

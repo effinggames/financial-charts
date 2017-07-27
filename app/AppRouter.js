@@ -11,6 +11,7 @@ class AppRouter extends NamedRouter {
         this.get('/', 'index', MainController.getHomePage);
         this.get('/europe', 'eafeChart', MainController.getEuropeAllocationChart);
         this.get('/usa-unemployment', 'usaUnemployment', MainController.getUnemploymentChart);
+        this.get('/yield-curve', 'yieldCurve', MainController.getYieldCurveChart);
     }
 }
 

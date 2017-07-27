@@ -146,6 +146,12 @@ class MainController {
             });
         });
     }
+    getYieldCurveChart(req, res) {
+        res.render('yield-curve', {
+            title: '10-Year Treasury Minus 2-Year Treasury',
+            data: {}
+        });
+    }
 }
 
 module.exports = new MainController();
