@@ -58,7 +58,7 @@ var concatCSS = function(minifyMe) {
         .pipe(reloadMe({stream:true}));
 };
 var copyStuff = function() {
-    return gulp.src('./assets/img/**/*', { base: './app' })
+    return gulp.src('./assets/img/**/*', { base: './assets' })
         .pipe(filterEmptyDirs())
         .pipe(gulp.dest(publicDir));
 };
@@ -102,7 +102,7 @@ gulp.task('default', ['clean'], function() {
         concatAppJS()
             .pipe(reloadMe({stream:true}));
     });
-    gulp.watch('./app/styles/**/*.styl', function() {
+    gulp.watch('./assets/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
         concatCSS();
     });
