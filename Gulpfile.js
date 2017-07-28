@@ -48,8 +48,8 @@ var concatVendorJS = function(minifyMe) {
 };
 var concatCSS = function(minifyMe) {
     return gulp.src([
-        './app/styles/reset.styl',
-        './app/styles/main.styl'
+        './assets/styles/reset.styl',
+        './assets/styles/main.styl'
     ])
         .pipe(stylus({use: [nib()]}))
         .pipe(concat('app.css'))

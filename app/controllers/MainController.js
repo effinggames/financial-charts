@@ -120,6 +120,7 @@ class MainController {
             });
         });
     }
+
     getUnemploymentChart(req, res) {
         //monthly unemployment rate query
         const query1 = Knex('usa.unemployment_rate');
@@ -146,9 +147,10 @@ class MainController {
             });
         });
     }
+
     getYieldCurveChart(req, res) {
         res.render('yield-curve', {
-            title: '10-Year Treasury Minus 2-Year Treasury',
+            title: '10-Year Treasury Minus 2-Year Treasury Yield',
             data: {}
         });
     }
