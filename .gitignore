@@ -10,3 +10,4 @@ npm-debug.log
 /app/.idea
 /node_modules
 /bower_components
+/.vscode

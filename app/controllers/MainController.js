@@ -10,7 +10,7 @@ class MainController {
         const query1 = Knex.raw(`
                 SELECT b.date, b.percentage::FLOAT, a.return_10
                 FROM analysis.sp_500_annualized_return a, usa.stock_asset_allocation b
-                WHERE (date_trunc('month', a.date + INTERVAL '1 month') = date_trunc('month', b.date))
+                WHERE (date_trunc('month', a.date) = date_trunc('month', b.date))
                 AND b.percentage IS NOT NULL
             `).then(rsp => rsp.rows);
 
