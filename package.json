@@ -11,6 +11,7 @@
     "node": "4.2.x"
   },
   "dependencies": {
+    "babel-eslint": "^8.2.1",
     "bluebird": "^2.9.34",
     "bower": "^1.7.9",
     "browser-sync": "^1.9.1",

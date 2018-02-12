@@ -1,16 +1,16 @@
 Financial-Chart
 =================
 
-Chart for "Stock Asset Allocation vs Annualized 10-year SPX Return".
+Chart for "Stock Asset Allocation vs Annualized 10-Year SPX Return".
 
 Using node, express, highcharts, angular.
 
-Displays data generated from here: https://github.com/robgraeber/financial-scraper
+Displays data generated from here: https://github.com/effinggames/financial-scraper
 
 ### Usage:
 
 ```
-git clone https://github.com/robgraeber/financial-chart.git && cd financial-chart
+git clone https://github.com/effinggames/financial-chart.git && cd financial-chart
 npm install
 (setup env variables)
 npm start

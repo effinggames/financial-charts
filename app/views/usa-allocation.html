@@ -1,31 +1,31 @@
 {% extends 'main-layout.html' %}
 
 {% block body %}
-    <div class="graphContainer"
-         allocation-chart
-         chart-data="$window.data.chartData"
-         chart-title="Stock Asset Allocation vs Annualized 10-Year SPX Return"
-         returns-axis-title="SPX 10-Year Returns"
-         allocation-axis-title="Stock Allocation (US Investors)"
-         allocation-percentage-min="17.5"
-         allocation-percentage-max="57.5">
-    </div>
-    <div class="infoTextContainer">
-        <span class="infoText correlation">
-            R<sup>2</sup>: [[ correlationSquared | round(7) | abs ]]
-        </span>
-        <span class="infoText">
-            Expected 10-Year SPX Returns: [[ (expectedReturns * 100) | toFixed(2) ]]%
-        </span>
-        <span class="infoText">
-            Last Updated: [[ lastUpdatedDate ]]
-        </span>
-        <span class="infoText">
-            Extrapolated 10-Year SPX Returns: [[ (extrapolatedReturns * 100) | toFixed(2) ]]%*
-        </span>
-        <span class="infoText">
-            Last Updated: [[ lastExtrapolatedDate ]]
-        </span>
-    </div>
-    <div class="disclaimer">* Based on the current price of the SPX index</div>
+  <div class="graphContainer"
+      allocation-chart
+      chart-data="$window.data.chartData"
+      chart-title="Stock Asset Allocation vs Annualized 10-Year SPX Return"
+      returns-axis-title="SPX 10-Year Returns"
+      allocation-axis-title="Stock Allocation (US Investors)"
+      allocation-percentage-min="17.5"
+      allocation-percentage-max="57.5">
+  </div>
+  <div class="infoTextContainer">
+    <span class="infoText correlation">
+      R<sup>2</sup>: [[ correlationSquared | round(7) | abs ]]
+    </span>
+    <span class="infoText">
+      Expected 10-Year SPX Returns: [[ (expectedReturns * 100) | toFixed(2) ]]%
+    </span>
+    <span class="infoText">
+      Last Updated: [[ lastUpdatedDate ]]
+    </span>
+    <span class="infoText">
+      Extrapolated 10-Year SPX Returns: [[ (extrapolatedReturns * 100) | toFixed(2) ]]%*
+    </span>
+    <span class="infoText">
+      Last Updated: [[ lastExtrapolatedDate ]]
+    </span>
+  </div>
+  <div class="disclaimer">* Based on the current price of the SPX index</div>
 {% endblock %}

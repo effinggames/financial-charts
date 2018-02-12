@@ -1,8 +1,6 @@
 (function() {
-    'use strict';
-    const angular = window.angular;
+  'use strict';
+  const angular = window.angular;
 
-    angular.module('app', []);
+  angular.module('app', []);
 })();
-
-
