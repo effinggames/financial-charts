@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install": "bower install --allow-root && gulp build",
+    "build": "bower install --allow-root && gulp build",
     "start": "node Main.js",
     "test": "echo \"NPM Test: no tests specified\"",
     "nodemon": "nodemon --ignore app/scripts/ --ignore public/ --ignore bower_components --ignore node_modules Main.js"
