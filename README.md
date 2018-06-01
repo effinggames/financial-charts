@@ -12,6 +12,7 @@ Displays data generated from here: https://github.com/effinggames/financial-scra
 ```
 git clone https://github.com/effinggames/financial-chart.git && cd financial-chart
 npm install
+npm run build
 (setup env variables)
 npm start
 ```
