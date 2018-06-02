@@ -18,8 +18,9 @@ npm start
 ```
 
 Env variables:  
-`NODE_ENV`: Set to 'production' for template caching  
-`DATABASE_URL`: Postgres connection string (required)
+`PORT`: Sets the port the server listens on. <Defaults to 8000>  
+`NODE_ENV`: Set to 'production' for template caching.  
+`DATABASE_URL`: Postgres connection string (required)   
 
 Gulp Tasks:  
 `gulp clean`: Cleans the /public folder and all compiled assets  
