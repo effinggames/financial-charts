@@ -9,7 +9,8 @@ class DatabaseHelper {
   constructor() {
     this.knex = new Knex({
       client: 'pg',
-      connection: Constants.PostgresConnectionString
+      connection: Constants.PostgresConnectionString,
+      pool: { min: 2, max: 2 }
     });
   }
 }
