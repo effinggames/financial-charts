@@ -8,16 +8,13 @@
     "test": "echo \"NPM Test: no tests specified\"",
     "nodemon": "nodemon --ignore app/scripts/ --ignore public/ --ignore bower_components --ignore node_modules Main.js"
   },
-  "engines": {
-    "node": "4.2.x"
-  },
   "dependencies": {
     "babel-eslint": "^8.2.1",
     "bluebird": "^2.9.34",
     "bower": "^1.7.9",
     "browser-sync": "^1.9.1",
     "compression": "^1.1.0",
-    "event-stream": "^3.2.2",
+    "event-stream": "3.3.4",
     "express": "^4.9.0",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.2.0",
