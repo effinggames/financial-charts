@@ -22,7 +22,12 @@ class MainController {
     //fetch queries
     Promise.all([query1, query2]).spread((rows1, rows2) => {
       //format dates
-      rows1.forEach(i => (i.date = i.date.toISOString().slice(0, 10)));
+      rows1.forEach(i => {
+        i.date = Moment(i.date)
+          .add(3, 'month')
+          .toISOString()
+          .slice(0, 10);
+      });
 
       //calculate linear regression
       const regressionData = rows1.filter(i => !!i.return_10).map(i => [i.percentage, i.return_10]);
@@ -88,7 +93,12 @@ class MainController {
     //fetch queries
     Promise.all([query1, query2]).spread((rows1, rows2) => {
       //format dates
-      rows1.forEach(i => (i.date = i.date.toISOString().slice(0, 10)));
+      rows1.forEach(i => {
+        i.date = Moment(i.date)
+          .add(3, 'month')
+          .toISOString()
+          .slice(0, 10);
+      });
 
       //calculate linear regression
       const regressionData = rows1.filter(i => !!i.return_10).map(i => [i.percentage, i.return_10]);
@@ -152,6 +162,7 @@ class MainController {
         i.end_date = i.end_date.toISOString().slice(0, 10);
       });
       const lastUpdatedDate = Moment(new Date(rows1[rows1.length - 1].date))
+        .add(1, 'months')
         .tz('GMT')
         .format('M/D/YYYY');
 
