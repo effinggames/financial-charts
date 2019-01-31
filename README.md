@@ -1,4 +1,4 @@
-Financial-Chart
+financial-chart
 =================
 
 Chart for "Stock Asset Allocation vs Annualized 10-Year SPX Return".
