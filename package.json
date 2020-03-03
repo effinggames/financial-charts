@@ -16,6 +16,7 @@
     "compression": "^1.1.0",
     "event-stream": "3.3.4",
     "express": "^4.9.0",
+    "graceful-fs": "^4.2.3",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.2.0",
     "gulp-clean": "^0.3.1",
@@ -37,6 +38,7 @@
     "pg": "^4.4.1",
     "regression": "^1.2.1",
     "request": "^2.51.0",
+    "vinyl-fs": "^3.0.3",
     "winston2": "^1.0.3"
   }
 }
