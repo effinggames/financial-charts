@@ -21,6 +21,7 @@ Env variables:
 `PORT`: Sets the port the server listens on. <Defaults to 8000>  
 `NODE_ENV`: Set to 'production' for template caching.  
 `DATABASE_URL`: Postgres connection string (required)   
+`GOOGLE_ANALYTICS_ID`: Google analytics id   
 
 Gulp Tasks:  
 `gulp clean`: Cleans the /public folder and all compiled assets  

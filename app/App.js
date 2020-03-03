@@ -2,7 +2,8 @@
 const Express = require('express'),
   Compress = require('compression'),
   AppRouter = require('./AppRouter'),
-  Nunjucks = require('nunjucks');
+  Nunjucks = require('nunjucks'),
+  Constants = require('../Constants');
 
 const viewDir = __dirname + '/views';
 const publicDir = __dirname + '/../public';
@@ -32,6 +33,7 @@ class App extends Express {
       }
     });
 
+    env.addGlobal('GoogleAnalyticsId', Constants.GoogleAnalyticsId);
     env.addGlobal('linkTo', (name, params) => AppRouter.build(name, params));
     env.addFilter('stringify', value => JSON.stringify(value));
     env.addFilter('toFixed', (value, num) => value.toFixed(num));

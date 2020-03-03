@@ -11,6 +11,7 @@ class Constants {
   constructor() {
     //Mandatory constants
     this.PostgresConnectionString = getEnvVariable('DATABASE_URL');
+    this.GoogleAnalyticsId = process.env['GOOGLE_ANALYTICS_ID'];
   }
 }
 
