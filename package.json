@@ -31,7 +31,7 @@
     "gulp-webpack": "^0.3.0",
     "knex": "^1.0.7",
     "moment": "^2.13.0",
-    "moment-timezone": "^0.5.4",
+    "moment-timezone": "^0.5.35",
     "named-router": "^2.0.2",
     "nib": "^1.1.0",
     "nunjucks": "^1.3.4",
