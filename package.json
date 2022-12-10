@@ -15,7 +15,7 @@
     "browser-sync": "^1.9.1",
     "compression": "^1.1.0",
     "event-stream": "3.3.4",
-    "express": "^4.9.0",
+    "express": "^4.17.3",
     "graceful-fs": "^4.2.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^5.2.0",
